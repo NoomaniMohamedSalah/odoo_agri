@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="agriculture_pointage_calendar_view" model="ir.ui.view">
+        <field name="name">agriculture.pointage.calendar</field>
+        <field name="model">agriculture.pointage</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Pointage" create="1" mode="month" date_start="date" event_open_popup="true"
+                      quick_add="false"
+                      color="secteur" hide_time="true" event_limit="6">
+                <field name="eau_start"/>
+                <field name="eau_end"/>
+                <field name="eau_quantity"/>
+                <field name="azote"/>
+                <field name="phosphore"/>
+                <field name="potassium"/>
+                <field name="engrais"/>
+                <field name="ammonium_nitrate"/>
+                <field name="soufre"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="agriculture_pointage_tree_view" model="ir.ui.view">
+        <field name="name">agriculture.pointage.tree</field>
+        <field name="model">agriculture.pointage</field>
+        <field name="arch" type="xml">
+            <tree string="Pointage">
+                <field name="date"/>
+                <field name="secteur"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="agriculture_pointage_search_view" model="ir.ui.view">
+        <field name="name">agriculture.pointage.search</field>
+        <field name="model">agriculture.pointage</field>
+        <field name="arch" type="xml">
+            <search string="Pointage">
+                <group expand="0" string="Group By">
+                    <filter name="group_by_month" string="Date opération" domain="[]" context="{'group_by': 'date:month'}"/>
+                    <filter name="group_by_day" string="Date opération" domain="[]" context="{'group_by': 'date:day'}"/>
+                    <filter name="group_by_secteur" string="Secteur" domain="[]" context="{'group_by': 'secteur'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="agriculture_pointage_form_view" model="ir.ui.view">
+        <field name="name">agriculture.pointage.form</field>
+        <field name="model">agriculture.pointage</field>
+        <field name="arch" type="xml">
+            <form string="Pointage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="user_id"/>
+                            <field name="secteur"/>
+                            <field name="eau_start"/>
+                            <field name="eau_end"/>
+                            <field name="eau_quantity"/>
+                        </group>
+                        <group>
+                            <field name="azote"/>
+                            <field name="phosphore"/>
+                            <field name="potassium"/>
+                            <field name="engrais"/>
+                            <field name="ammonium_nitrate"/>
+                            <field name="soufre"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--        action to open Pointage -->
+    <record id="open_pointage" model="ir.actions.act_window">
+        <field name="name">Pointage</field>
+        <field name="res_model">agriculture.pointage</field>
+        <field name="view_mode">calendar,form</field>
+    </record>
+
+     <!--        action all pointage -->
+    <record id="open_all_pointage" model="ir.actions.act_window">
+        <field name="name">Tous les Pointage</field>
+        <field name="res_model">agriculture.pointage</field>
+        <field name="view_id" ref="agriculture_pointage_tree_view"/>
+        <field name="context">{'search_default_group_by_month': 1, 'search_default_group_by_day': 1}</field>
+    </record>
+
+    <!--        add guarantee menu -->
+    <menuitem id="menu_agriculture_root"
+              name="Agriculture"
+              web_icon="agriculture_management,static/description/icon.png"
+              sequence="1"/>
+
+    <menuitem
+            id="menu_agriculture_pointage"
+            name="Pointage"
+            parent="menu_agriculture_root"
+            action="open_pointage"
+            sequence="1"/>
+
+    <menuitem
+            id="menu_agriculture_all_pointage"
+            name="Tous les Pointages"
+            parent="menu_agriculture_root"
+            action="open_all_pointage"
+            sequence="2"/>
+</odoo>
