@@ -18,6 +18,10 @@
                 <field name="engrais"/>
                 <field name="ammonium_nitrate"/>
                 <field name="soufre"/>
+                <field name="magnesium"/>
+                <field name="calcium"/>
+                <field name="dithane"/>
+                <field name="acide_amine"/>
             </calendar>
         </field>
     </record>
@@ -40,7 +44,8 @@
         <field name="arch" type="xml">
             <search string="Pointage">
                 <group expand="0" string="Group By">
-                    <filter name="group_by_month" string="Date opération" domain="[]" context="{'group_by': 'date:month'}"/>
+                    <filter name="group_by_month" string="Date opération" domain="[]"
+                            context="{'group_by': 'date:month'}"/>
                     <filter name="group_by_day" string="Date opération" domain="[]" context="{'group_by': 'date:day'}"/>
                     <filter name="group_by_secteur" string="Secteur" domain="[]" context="{'group_by': 'secteur'}"/>
                 </group>
@@ -70,6 +75,10 @@
                             <field name="engrais"/>
                             <field name="ammonium_nitrate"/>
                             <field name="soufre"/>
+                            <field name="magnesium"/>
+                            <field name="calcium"/>
+                            <field name="dithane"/>
+                            <field name="acide_amine"/>
                         </group>
                     </group>
                 </sheet>
@@ -81,14 +90,39 @@
     <record id="open_pointage" model="ir.actions.act_window">
         <field name="name">Pointage</field>
         <field name="res_model">agriculture.pointage</field>
-        <field name="view_mode">calendar,form</field>
+        <field name="view_mode">calendar,form,tree</field>
+        <field name="context">{'search_default_group_by_month': 1, 'search_default_group_by_day': 1}</field>
     </record>
 
-     <!--        action all pointage -->
-    <record id="open_all_pointage" model="ir.actions.act_window">
+    <record id="agriculture_pointage_tree_view_details" model="ir.ui.view">
+        <field name="name">agriculture.pointage.tree.details</field>
+        <field name="model">agriculture.pointage</field>
+        <field name="arch" type="xml">
+            <tree string="Pointage détaillé" editable="bottom" multi_edit="1">
+                <field name="date"/>
+                <field name="secteur"/>
+                <field name="eau_start"/>
+                <field name="eau_end"/>
+                <field name="eau_quantity"/>
+                <field name="azote"/>
+                <field name="phosphore"/>
+                <field name="potassium"/>
+                <field name="engrais"/>
+                <field name="ammonium_nitrate"/>
+                <field name="soufre"/>
+                <field name="magnesium"/>
+                <field name="calcium"/>
+                <field name="dithane"/>
+                <field name="acide_amine"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--        action all pointage -->
+    <record id="open_detail_pointage" model="ir.actions.act_window">
         <field name="name">Tous les Pointage</field>
         <field name="res_model">agriculture.pointage</field>
-        <field name="view_id" ref="agriculture_pointage_tree_view"/>
+        <field name="view_id" ref="agriculture_pointage_tree_view_details"/>
         <field name="context">{'search_default_group_by_month': 1, 'search_default_group_by_day': 1}</field>
     </record>
 
@@ -107,8 +141,8 @@
 
     <menuitem
             id="menu_agriculture_all_pointage"
-            name="Tous les Pointages"
+            name="Pointage détaillé"
             parent="menu_agriculture_root"
-            action="open_all_pointage"
+            action="open_detail_pointage"
             sequence="2"/>
 </odoo>

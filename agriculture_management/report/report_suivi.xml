@@ -47,6 +47,18 @@
                             <th name="th_soufre" class="text-center">
                                 <span>Soufre</span>
                             </th>
+                            <th name="th_magnesium" class="text-center">
+                                <span>Magnésium</span>
+                            </th>
+                            <th name="th_calcium" class="text-center">
+                                <span>Calcium</span>
+                            </th>
+                            <th name="th_dithane" class="text-center">
+                                <span>Dithane</span>
+                            </th>
+                            <th name="th_acide_amine" class="text-center">
+                                <span>Acide aminé</span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="invoice_tbody">
@@ -56,31 +68,56 @@
                                     <span t-field="o.secteur"/>
                                 </td>
                                 <td class="text-center">
-                                    <span t-field="o.eau_start"/>
+                                    <span t-esc="o.eau_start.strftime('%H')"/>
+                                    <span> H</span>
                                 </td>
                                 <td class="text-center">
-                                    <span t-field="o.eau_end"/>
+                                    <span t-esc="o.eau_end.strftime('%H')"/>
+                                    <span> H</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.eau_quantity"/>
+                                    <span> L</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.azote"/>
+                                    <span> Kg</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.phosphore"/>
+                                    <span> Kg</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.potassium"/>
+                                    <span> Kg</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.engrais"/>
+                                    <span> L</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.ammonium_nitrate"/>
+                                    <span> Kg</span>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="o.soufre"/>
+                                    <span> Kg</span>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="o.magnesium"/>
+                                    <span> Kg</span>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="o.calcium"/>
+                                    <span> Kg</span>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="o.dithane"/>
+                                    <span> Kg</span>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="o.acide_amine"/>
+                                    <span> L</span>
                                 </td>
                             </tr>
                         </t>
