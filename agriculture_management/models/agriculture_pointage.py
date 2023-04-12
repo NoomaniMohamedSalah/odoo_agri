@@ -19,7 +19,7 @@ class AgriculturePointage(models.Model):
                                                             ('secteur_6', 'Secteur 6'),], required=True, )
     eau_start = fields.Datetime(string="Début arossage", required=False, )
     eau_end = fields.Datetime(string="Fin arossage", required=False, )
-    eau_quantity = fields.Float(string="Quantité d'eau (L)",  required=False, compute="compute_water_quantity", store=True)
+    eau_quantity = fields.Float(string="Quantité d'eau (L)",  required=False, compute="compute_water_quantity")
     azote = fields.Float(string="Azote (kg)",  required=False, )
     phosphore = fields.Float(string="Phosphore (kg)",  required=False, )
     engrais = fields.Float(string="Engrais (L)",  required=False, )
